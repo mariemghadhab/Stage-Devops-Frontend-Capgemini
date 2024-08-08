@@ -1,22 +1,26 @@
+# Étape 1 : Construction de l'image de construction
 FROM node:16 AS builder
 
-# Définition du répertoire de travail
 WORKDIR /app
 
-# Copie des fichiers nécessaires pour l'installation des dépendances
 COPY package.json package-lock.json ./
 
 # Installation des dépendances
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copie du reste des fichiers de l'application
 COPY . .
 
 # Construction de l'application
-RUN npm run build --prod
+RUN npm run build
 
-# Utilisation d'une image nginx légère pour servir l'application
+# Étape 2 : Construction de l'image finale
 FROM nginx:alpine
 
-# Copie du build de l'application Angular à partir du builder stage
-COPY --from=builder /app/dist/crudtuto-Front /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Exposition du port 80
+EXPOSE 80
+
+# Commande par défaut pour démarrer Nginx
+CMD ["nginx", "-g", "daemon off;"]
