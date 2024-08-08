@@ -1,4 +1,4 @@
-FROM node:12.14.0 AS builder
+FROM node:16 AS builder
 
 # Définition du répertoire de travail
 WORKDIR /app
