@@ -17,7 +17,10 @@ RUN npm run build
 # Étape 2 : Construction de l'image finale
 FROM nginx:alpine
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html/crudtuto-Front
+
+# Copier la configuration personnalisée
+COPY default.conf /etc/nginx/conf.d/
 
 # Exposition du port 80
 EXPOSE 80
