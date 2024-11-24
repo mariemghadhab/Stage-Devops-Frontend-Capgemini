@@ -1,5 +1,5 @@
 # Étape 1 : Construction de l'image de construction
-FROM node:14 AS builder
+FROM trion/ng-cli:14.0.0 AS builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Construction de l'application
-RUN npm run build --prod
+RUN ng build --prod
 
 # Étape 2 : Construction de l'image finale
 FROM nginx:alpine
