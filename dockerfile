@@ -12,7 +12,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Construction de l'application
-RUN npm run build
+RUN npm run build --prod
 
 # Étape 2 : Construction de l'image finale
 FROM nginx:alpine
