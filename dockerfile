@@ -1,5 +1,5 @@
 # Étape 1 : Construction de l'image de construction
-FROM node:16 AS builder
+FROM node:14 AS builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Construction de l'application
-RUN npm run build
+RUN npm run build --prod
 
 # Étape 2 : Construction de l'image finale
 FROM nginx:alpine
