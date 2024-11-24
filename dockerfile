@@ -17,6 +17,7 @@ RUN npm run build
 # Étape 2 : Construction de l'image finale
 FROM nginx:alpine
 
+# Copier les fichiers Angular générés
 COPY --from=builder /app/dist /usr/share/nginx/html/crudtuto-Front
 
 # Copier la configuration personnalisée
