@@ -11,11 +11,8 @@ RUN npm install --legacy-peer-deps
 # Copie du reste des fichiers de l'application
 COPY . .
 
-# Définir NODE_OPTIONS avant de construire l'application
-ENV NODE_OPTIONS=--openssl-legacy-provider
-
 # Construction de l'application
-RUN npm run build --prod
+RUN npm run build
 
 # Étape 2 : Construction de l'image finale
 FROM nginx:alpine
